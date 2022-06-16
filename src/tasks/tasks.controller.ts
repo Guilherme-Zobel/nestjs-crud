@@ -1,5 +1,13 @@
 import { TaskService } from './shared/task.service';
-import { Controller, Get, Param, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { Task } from './shared/task';
 
 @Controller('tasks')
@@ -17,14 +25,18 @@ export class TasksController {
   }
 
   @Post()
-  async create(@Body() task: Task ): Promise<Task> {
+  async create(@Body() task: Task): Promise<Task> {
     return this.taskService.create(task);
   }
 
   @Put(':id')
-  async update(@Param('id') id: number, @BBody() task: Task): Promise<Task> {
+  async update(@Param('id') id: number, @Body() task: Task): Promise<Task> {
     task.id = id;
     return this.taskService.update(task);
   }
-}
 
+  @Delete(':id')
+  async delete(@Param('id') id: number) {
+    this.taskService.delete(id);
+  }
+}

@@ -39,7 +39,7 @@ export class TaskService {
 
   update(task: Task) {
     const taskArray = this.getById(task.id);
-    if(taskArray) {
+    if (taskArray) {
       taskArray.desciption = task.desciption;
       taskArray.completed = task.completed;
     }
