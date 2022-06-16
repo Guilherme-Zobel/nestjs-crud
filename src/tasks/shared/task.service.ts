@@ -26,7 +26,15 @@ export class TaskService {
   }
 
   create(task: Task) {
+    let lastId = 0;
+    if (this.tasks.length > 0) {
+      lastId = this.tasks[this.tasks.length - 1].id;
+    }
 
+    task.id = lastId + 1;
+    this.tasks.push(task);
+
+    return task;
   }
 
   update(task: Task) {
